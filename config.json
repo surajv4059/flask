@@ -1,0 +1,16 @@
+{
+    "params":
+    {
+        "local_server":"True",
+        "local_uri": "mysql://root:@localhost/anotherblog",
+        "prod_uri" : "mysql://root:@localhost/anotherblog",
+        "li_url" : "https://www.linkedin.com/in/suraj-verma-09a67017a/",
+        "gh_url" : "https://github.com/surajv4059",
+        "tw_url" : "https://twitter.com/surajverma4059",
+        "website_name" : "AnotherBlog",
+        "website_tagline": "A blog loved by the TECHIES",
+        "gmail_user" : "suraj12.116@gmail.com",
+        "gmail_password" : "hknkvubbqwkpazrb",
+        "about_text" : "Hey Guys! Suraj here"
+    }
+}
