@@ -47,25 +47,34 @@ class Posts(db.Model):
     content = db.Column(db.String(300), nullable=False)
     date = db.Column(db.String(12), nullable = True)
     img_file = db.Column(db.String(12), nullable = False)
-    subheading = db.Column(db.String(12), nullable = False)
-
+    tagline = db.Column(db.String(12), nullable = False)
+  
  
  
 @app.route("/")
 def home():
-    return render_template('index.html', params=params)
-
+    posts = Posts.query.all()[0:params['no_of_posts']]
+    # posts = db.get_or_404(Posts,id)
+    return render_template('index.html', params=params, posts=posts)
+  
 @app.route("/about")
 def about():
     return render_template('about.html', params=params)
+
+@app.route("/dashboard", methods = ['GET' , 'POST'])
+def dashboard():
+    if request.method=='POST':
+        #redirect to admin panel
+        pass
+    else: 
+        return render_template('login.html', params=params)
   
 @app.route("/post/<string:post_slug>",methods = ['GET'])
 def posts_route(post_slug):
-    post = Posts.query.filter_by(slug=post_slug)
+    # post = Posts.query.filter_by(slug=post_slug)
     post = db.one_or_404(db.select(Posts).filter_by(slug = post_slug))
-    print("I AM" ,post , "endpost")
     return render_template('post.html', params=params, post = post)
-
+ 
 @app.route("/contact" , methods = ['GET' , 'POST'])
 def contact():
     if(request.method == 'POST'):

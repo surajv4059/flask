@@ -11,6 +11,10 @@
         "website_tagline": "A blog loved by the TECHIES",
         "gmail_user" : "suraj12.116@gmail.com",
         "gmail_password" : "hknkvubbqwkpazrb",
-        "about_text" : "Hey Guys! Suraj here"
+        "about_text" : "Hey Guys! Suraj here",
+        "no_of_posts": 5,
+        "login_image":"login.svg",
+        "admin_user":"suraj",
+        "admin_password":"verma"
     }
 }
