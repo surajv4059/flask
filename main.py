@@ -1,4 +1,4 @@
-from flask import Flask , render_template , request
+from flask import Flask , render_template , request , session
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 from flask_mail import Message
@@ -14,6 +14,7 @@ local_server = True
 
 db = SQLAlchemy()
 app = Flask(__name__)
+app.secret_key = 'super-secret-key'
 app.config.update(
     MAIL_SERVER = 'smtp.gmail.com',
     MAIL_PORT = '465',
@@ -63,11 +64,19 @@ def about():
 
 @app.route("/dashboard", methods = ['GET' , 'POST'])
 def dashboard():
-    if request.method=='POST':
-        #redirect to admin panel
-        pass
-    else: 
-        return render_template('login.html', params=params)
+    if 'user' in session and session['user'] == params['admin_user']:
+        posts = Posts.query.all()
+        return render_template('dashboard.html',params=params,posts=posts)
+
+    if request.method == 'POST':
+        username = request.form.get('uname')
+        userpass = request.form.get('pass')
+        if username == params['admin_user'] and userpass == params['admin_password']:
+            session['user'] = username
+            posts = Posts.query.all()
+            return render_template('dashboard.html',params=params, post=posts)
+    
+    return render_template('login.html', params=params)
   
 @app.route("/post/<string:post_slug>",methods = ['GET'])
 def posts_route(post_slug):
